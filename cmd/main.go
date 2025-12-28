@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/pnaskardev/calc/basic"
-	"github.com/pnaskardev/calc/utils"
+
 	mylogger "github.com/pnaskardev/my-logger"
 )
 
@@ -21,13 +21,4 @@ func main() {
 
 	mylogger.Info("TEST")
 
-	// Topic B: Pointers & Memory Mechanics
-
-	a, b := 5, 6
-
-	fmt.Println("BEFORE SWAP", a, b)
-
-	utils.Swap(&a, &b)
-
-	fmt.Println("AFTER SWAP", a, b)
 }
