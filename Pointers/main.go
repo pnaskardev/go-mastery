@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/pnaskardev/go-mastery/Pointers/models"
 )
 
 func makePointer() *int {
@@ -14,6 +16,22 @@ func main() {
 	p := *makePointer()
 
 	fmt.Println(p)
+
+	u := models.CreateNewUser()
+
+	u.BirthdayByValue()
+
+	fmt.Printf("BY VALUE - %+v\n", u)
+
+	u.BirthdayByRef()
+
+	fmt.Printf("BY REF - %+v\n", u)
+
+	// user_nil := models.User{}
+
+	error := models.UserNilCheck(nil)
+
+	fmt.Println(error.Error())
 
 }
 
