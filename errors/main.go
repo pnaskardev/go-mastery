@@ -41,6 +41,15 @@ func someFunction() error {
 	return &AppError{Code: 101, Message: "not found"}
 }
 
+func dbConnection() error {
+	return errors.New("DB_CONNECTIO_FAILED")
+}
+
+func wrapperFunction() error {
+	err := dbConnection()
+	return fmt.Errorf("SOMETHING WENT WRONG %+w", err)
+}
+
 func main() {
 
 	// result, err := Divide(2, 0)
@@ -65,14 +74,23 @@ func main() {
 
 	// ==============================================================
 
-	err := someFunction()
+	// err := someFunction()
 
-	var customErr *AppError
+	// var customErr *AppError
 
-	if errors.As(err, &customErr) {
-		fmt.Printf("Caught custom error AppError. Code: %d, Message: %s\n", customErr.Code, customErr.Message)
-		fmt.Println(customErr.Error())
-	} else {
-		fmt.Println("Error is not of type *AppError")
+	// if errors.As(err, &customErr) {
+	// 	fmt.Printf("Caught custom error AppError. Code: %d, Message: %s\n", customErr.Code, customErr.Message)
+	// 	fmt.Println(customErr.Error())
+	// } else {
+	// 	fmt.Println("Error is not of type *AppError")
+	// }
+
+	// ==================================================================
+
+	err := wrapperFunction()
+
+	for e := err; e != nil; e = errors.Unwrap(e) {
+		fmt.Println(" ->", e)
 	}
+
 }
